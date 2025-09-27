@@ -1,6 +1,14 @@
 import java.util.Iterator;
 import java.util.ListIterator;
 
+/**
+ * MyArrayList Class that is used to create an ArrayList.
+ * 
+ * @author Rishik Sehgal
+ * No assistance    
+ * 
+ * @version (Sep 27, 2025)
+ */
 public class MyArrayList<E>
 {
 	private int size;
@@ -31,7 +39,7 @@ public class MyArrayList<E>
 	private void doubleCapacity()
 	{
 		Object[] x = new Object[values.length * 2];
-		for(int i = 0; i < values.length; i++){
+		for(int i = 0; i < size; i++){
 			x[i] = values[i];
 		}
 		values = x;
@@ -49,19 +57,15 @@ public class MyArrayList<E>
 
 	public int size()
 	{
-		int x = 0;
-		for(int i = 0; i < values.length; i++){
-			if (values[i] != null)
-				x++;
-		}
-		return x;
+		return size;
 	}
 
 	public E get(int index)
 	{
-		if (values.length > index && values[index] instanceof E )
-			return values[index];
-		//(You will need to promise the return value is of type E.)
+		if(index >= size || index < 0)
+			return null;
+		E x = (E) values[index];
+		return x;
 	}
 
 	/** 
@@ -70,7 +74,11 @@ public class MyArrayList<E>
 	*/
 	public E set(int index, E obj)
 	{
-		
+		if(index >= size || index < 0)
+			return null;
+		E temp = (E) values[index];
+		values[index] = obj;
+		return temp;
 
 		//(You will need to promise the return value is of type E.)
 	}
@@ -80,9 +88,14 @@ public class MyArrayList<E>
 	*/
 	public boolean add(E obj)
 	{
+		if(values.length == size)
+			doubleCapacity();
+		values[size] = obj;
+		size++;
+		return true;
 		/* if values is already full, call doubleCapacity before adding */
 
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		
 	}
 
 	/**
@@ -93,9 +106,15 @@ public class MyArrayList<E>
 	*/
 	public E remove(int index)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		if(index >= size || index < 0)
+			return null;
+		E x = (E) values[index];
+		for (int i = index; i < size - 1;i++)
+			values[i] = values[i+1];
+		values[size - 1] = null;
+		size--;
+		return x;
 
-		//(You will need to promise the return value is of type E.)
 	}
 
 	public Iterator<E> iterator()
@@ -111,35 +130,54 @@ public class MyArrayList<E>
 	*/
 	public void add(int index, E obj)
 	{
-		;
+		if (index > size || index < 0)
+			return;
+		if (size == values.length)
+			doubleCapacity();
+		for (int i = size; i > index; i--)
+			values[i] = values[i - 1];
+		values[index] = obj;
+		size++;
+		
+		
 	}
 
 	private class MyArrayListIterator implements Iterator<E>
 	{
 		//the index of the value that will be returned by next()
 		private int nextIndex;
+		private int last;
 
 		public MyArrayListIterator()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+			nextIndex = 0;
+			last = -1;
 		}
 
 		public boolean hasNext()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+				return nextIndex < size;
 		}
 
 		public E next()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
-
-			//(You will need to promise the return value is of type E.)
+			if(hasNext()){
+				E x = (E) values[nextIndex];
+				last = nextIndex;
+				nextIndex++;
+				return x;
+			}
+			return null;
 		}
 
 		//@postcondition removes the last element that was returned by next
 		public void remove()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+			if(last < 0)
+				return;
+			MyArrayList.this.remove(last);
+			nextIndex--;
+			last = -1;
 		}
 	}
 }

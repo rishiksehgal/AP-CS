@@ -31,43 +31,60 @@ public class MyLinkedList<E>
 	/** 
 	* @precondition  0 <= index <= size / 2
 	* @postcondition starting from first, returns the node
-	*               with given index (where index 0
-	*/               returns first)
+	*               with given index (where index 0 returns first)
+	*/               
 	private DoubleNode getNodeFromFirst(int index)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		DoubleNode x = first;
+		int z = 0;
+		while(z != index) {
+			x = x.getNext();
+			z++;
+		}
+			
+		return x;
+		
+		
 	}
 
 	/** 
 	* @precondition  size / 2 <= index < size
 	* @postcondition starting from last, returns the node
-	*               with given index (where index size-1
-	*/               returns last)
+	*               with given index (where index size-1 returns last)
+	*/               
 	private DoubleNode getNodeFromLast(int index)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		DoubleNode x = last;
+		int z = size - 1;
+		while(z != index) {
+			x = x.getPrevious();
+			z--;
+		}
+			
+		return x;
 	}
 
 	/** 
 	* @precondition  0 <= index < size
 	* @postcondition starting from first or last (whichever
-	*               is closer), returns the node with given
-	*/               index
+	*               is closer), returns the node with given index
+	*/               
 	private DoubleNode getNode(int index)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		if(index < size/2)
+			return getNodeFromFirst(index);
+		return getNodeFromLast(index);
 	}
 
 	public int size()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		return size;
 	}
 
 	public E get(int index)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
-
-		//(You will need to promise the return value is of type E.)
+		DoubleNode x = getNode(index);
+		return (E) x.getValue();
 	}
 
 	/** 
@@ -76,7 +93,10 @@ public class MyLinkedList<E>
 	*/
 	public E set(int index, E obj)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		DoubleNode x = getNode(index);
+		E y = (E) x.getValue();
+		x.setValue(obj);
+		return y;
 
 		//(You will need to promise the return value is of type E.)
 	}
@@ -86,7 +106,8 @@ public class MyLinkedList<E>
 	*/
 	public boolean add(E obj)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		addLast(obj);
+		return true;
 	}
 
 	/** 
@@ -97,7 +118,20 @@ public class MyLinkedList<E>
 	*/
 	public E remove(int index)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		if(index >= size || index < 0)
+			return null;
+		E x = (E) getNode(index).getValue();
+		if(index == size - 1)
+			removeLast();
+		else if (index == 0)
+			removeFirst();
+		else{
+		DoubleNode y = getNode(index);
+		y.getNext().setPrevious(y.getPrevious());
+		y.getPrevious().setNext(y.getNext());
+		size--;
+		}
+		return x;
 
 		//(You will need to promise the return value is of type E.)
 	}
@@ -110,45 +144,96 @@ public class MyLinkedList<E>
 	*/
 	public void add(int index, E obj)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		if(index == size)
+			addLast(obj);
+		else if (index == 0)
+			addFirst(obj);
+		else{
+			DoubleNode x = new DoubleNode(obj);
+			DoubleNode y = getNode(index);
+			x.setPrevious(y.getPrevious());
+			y.getPrevious().setNext(x);
+			x.setNext(y);
+			y.setPrevious(x);
+			size++;
+		}
+
+		
+		
 	}
 
 	public void addFirst(E obj)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		DoubleNode x = new DoubleNode(obj);
+		if(first == null){
+			first = x;
+			last = x;
+		}
+		else{
+			x.setNext(first);
+			first.setPrevious(x);
+			first = x;
+		}
+		size++;
 	}
 
 	public void addLast(E obj)
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		DoubleNode x = new DoubleNode(obj);
+		if(first == null){
+			first = x;
+			last = x;
+		}
+		else{
+			x.setPrevious(last);
+			last.setNext(x);
+			last = x;
+		}
+		size++;
 	}
 
 	public E getFirst()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
-
-		//(You will need to promise the return value is of type E.)
+		if(first == null)
+			return null;
+		return (E) first.getValue();
 	}
 
 	public E getLast()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
-
-		//(You will need to promise the return value is of type E.)
+		if(last == null)
+			return null;
+		return (E) last.getValue();
 	}
 
 	public E removeFirst()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
+		if(first == null)
+			return null;
+		E r = (E) first.getValue();
+		first = first.getNext();
+		if(first != null)
+			first.setPrevious(null);
+		else
+			last = null;
+		size--;
+		return r;
 
-		//(You will need to promise the return value is of type E.)
+		
 	}
 
 	public E removeLast()
 	{
-		throw new RuntimeException("INSERT MISSING CODE HERE");
-
-		//(You will need to promise the return value is of type E.)
+		if(last == null)
+			return null;
+		E r = (E) last.getValue();
+		last = last.getPrevious();
+		if(last != null)
+			last.setNext(null);
+		else
+			first = null;
+		size--;
+		return r;
 	}
 
 	public Iterator<E> iterator()
@@ -159,20 +244,31 @@ public class MyLinkedList<E>
 	private class MyLinkedListIterator implements Iterator<E>
 	{
 		private DoubleNode nextNode;
+		private DoubleNode returned;
+		private boolean remove;
 
 		public MyLinkedListIterator()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+			if(first != null)
+				nextNode = first;
+			returned = null;
+			remove = false;
 		}
 
 		public boolean hasNext()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+			return nextNode != null;
 		}
 
 		public E next()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+			if(!hasNext())
+				return null;
+			E x = (E) nextNode.getValue();
+			returned = nextNode;
+			nextNode = nextNode.getNext();
+			remove = true;
+			return x;
 
 			//(You will need to promise the return value is of type E.)
 		}
@@ -180,7 +276,23 @@ public class MyLinkedList<E>
 		//@postcondition removes the last element that was returned by next
 		public void remove()
 		{
-			throw new RuntimeException("INSERT MISSING CODE HERE");
+			if(remove && returned != null){
+				if(returned.getPrevious() == null){
+					first = nextNode;
+				}
+				else{
+					returned.getPrevious().setNext(returned.getNext());
+				}
+				if(returned.getNext() == null)
+					last = returned.getPrevious();
+				else{
+					returned.getNext().setPrevious(returned.getPrevious());
+				}
+				 size--;
+				 returned = null;
+				 remove = false;
+
+			}
 		}
 	}
 }
