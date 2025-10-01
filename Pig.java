@@ -1,14 +1,26 @@
-public class Pig extends Animal{
-    public Pig(){
+/**
+ * A pig animal on OldMacDonaldsFarm
+ * 
+ * @author Rishik Sehgal
+ * No assistance
+ * 
+ * @version 1
+ * 
+ */
+public class Pig extends Animal
+{
+    public Pig()
+    {
         this("pig");
     }
 
-    public Pig(String pigType){
+    public Pig(String pigType)
+    {
         super("Sus Crofa Domesticus", pigType);
     }
 
-    public void speak()
+    public String speak()
     {
-        System.out.println("oink");
+         return "oink";
     }
 }

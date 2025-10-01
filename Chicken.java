@@ -1,18 +1,40 @@
+/**
+ * A chicken animal on OldMacDonaldsFarm
+ * 
+ * @author Rishik Sehgal
+ * No assistance
+ * 
+ * @version 1
+ * 
+ */
 public class Chicken extends Animal
 {
 
-
-    public Chicken(){
+    /**
+     * Calls the parameterized constructor with the common name of chicken
+     */
+    public Chicken()
+    {
         this("chicken");
     }
 
-    public Chicken(String chickenType){
+    /**
+     * Creates a Chicken object with the given common name
+     * @param chickenType is the common name 
+     */
+    public Chicken(String chickenType)
+    {
         super("Gallus Gallus Domesticus", chickenType);
     }
     
+    /**
+     * Returns the sound of the chicken
+     * @return "bawk"
+     */
     @Override
-    public void speak(){
-        System.out.println("bawk");
+    public String speak()
+    {
+        return "bawk";
     }
 
     

@@ -1,10 +1,19 @@
+/**
+ * A chick chicken animal on OldMacDonaldsFarm
+ * 
+ * @author Rishik Sehgal
+ * No assistance
+ * 
+ * @version 1
+ * 
+ */
 public class Chick extends Chicken{
     public Chick()
     {
         
     }
-    public void speak()
+    public String speak()
     {
-        System.out.println("peep");
+        return "peep";
     }
 }

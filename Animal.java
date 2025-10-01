@@ -1,3 +1,12 @@
+/**
+ * Abstract parent class for all animals.
+ * 
+ * @author Rishik Sehgal
+ * No assistance
+ * 
+ * @version 1
+ * 
+ */
 public abstract class Animal implements Comparable<Animal>
 {
 
@@ -5,31 +14,67 @@ public abstract class Animal implements Comparable<Animal>
 private String latinName;
 private String commonName;
 
-public Animal(String l, String c){
+/**
+ * Constructs an animal with the latinName and commonName provided
+ * @param l is the latin name 
+ * @param c is the common name
+ */
+public Animal(String l, String c)
+{
     latinName = l;
     commonName = c;
 }
 
-public String getLatinName(){
+/**
+ * Returns the Latin name
+ * @return the Latin name
+ */
+public String getLatinName()
+{
     return latinName;
 }
 
-public String getCommonName(){
+/**
+ * Returns the common name
+ * @return the common name
+ */
+public String getCommonName()
+{
     return commonName;
 }
 
-public void setLatinName(String s){
+/**
+ * Sets the Latin name
+ * @param s is the Latin name
+ */
+public void setLatinName(String s)
+{
     latinName = s;
 }
 
-public void setCommonName(String s){
+/**
+ * Sets the Common Name
+ * @param s is the common name
+ */
+public void setCommonName(String s)
+{
     commonName = s;
 }
 
-public abstract void speak();
+/**
+ * Abstract method for each animal to define its sound
+ * @return the sound of the animal
+ */
+public abstract String speak();
 
-
-public int compareTo(Animal a ){
+/**
+ * Compares the common name of animals
+ * @param a is the animal being compared with 
+ * @return negative value if before, positive value if after and 0 if the same
+ */
+@Override
+public int compareTo(Animal a )
+{
     return a.getCommonName().compareTo(this.getCommonName());
 }
 

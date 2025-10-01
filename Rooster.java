@@ -1,8 +1,20 @@
-public class Rooster extends Chicken{
-    public Rooster(){
+/**
+ * A rooster chicken animal on OldMacDonaldsFarm
+ * 
+ * @author Rishik Sehgal
+ * No assistance
+ * 
+ * @version 1
+ * 
+ */
+public class Rooster extends Chicken
+{
+    public Rooster()
+    {
 
     }
-    public void speak(){
-        System.out.println("cock-a-doodle-do");
+    public String speak()
+    {
+        return "cock-a-doodle-do";
     }
 }
