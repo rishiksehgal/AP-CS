@@ -4,7 +4,7 @@
  * @author Rishik Sehgal
  * No assistance    
  * 
- * @version (Sep 27, 2025)
+ * @version Sep 27, 2025
  */
 public class DoubleNode
 {
