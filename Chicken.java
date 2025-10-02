@@ -4,7 +4,7 @@
  * @author Rishik Sehgal
  * No assistance
  * 
- * @version 1
+ * @version Oct 2, 2025
  * 
  */
 public class Chicken extends Animal
