@@ -1,4 +1,6 @@
 import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.ConcurrentModificationException;
 /**
  * MyArrayList is our implementation of an ArrayList.
  *
@@ -125,6 +127,18 @@ public class MyArrayList<E>
         return true;
     }
 
+    public void add(int index, E obj)
+    {
+        if (index > size || index < 0)
+            return;
+        if (values.length == size)
+            doubleCapacity();
+        for (int i = size; i > index; i--)
+            values[i] = values[i - 1];
+        values[index] = obj;
+        size++;
+    }
+
     /**
      * Removes element from ndex.
      *
@@ -157,33 +171,42 @@ public class MyArrayList<E>
         return new MyArrayListIterator();
     }
 
+    public ListIterator<E> listIterator()
+    {
+        return new MyArrayListIterator();
+    }
 
     /**
      * Iterator class for MyArrayList.
      */
-    private class MyArrayListIterator implements Iterator<E> 
+    private class MyArrayListIterator implements ListIterator<E> 
     {
         private int nextIndex;
         private int last;
+        private int rightSize;
+        private Object[] rightStuff;
 
         /**
          * Creates an iterator at the start of list
         */
-        MyArrayListIterator() 
+        public MyArrayListIterator() 
         {
             nextIndex = 0;
             last = -1;
+            expectedArray();
         }
 
         @Override
         public boolean hasNext() 
         {
+            checkMod();
             return nextIndex < size;
         }
 
         @Override
         public E next() 
         {
+            checkMod();
             if (hasNext()) 
             {
                 E elem = (E) values[nextIndex];
@@ -194,16 +217,86 @@ public class MyArrayList<E>
             return null;
         }
 
+        public int nextIndex()
+        {
+            checkMod();
+            return nextIndex;
+        }
+
+        public int previousIndex()
+        {
+            checkMod();
+            return nextIndex - 1;
+        }
+
+        public E previous()
+        {
+            checkMod();
+            if(hasPrevious())
+            {
+               nextIndex--;
+               last = nextIndex;
+               return (E) values[last];
+
+            }
+            return null;
+        }
+
+        public void set(E obj)
+        {
+            checkMod();
+            if(last < 0)
+                return;
+            MyArrayList.this.set(last,obj);
+            expectedArray();
+        }
+
+        public boolean hasPrevious()
+        {
+            checkMod();
+            return nextIndex > 0;
+        }
         @Override
         public void remove() 
         {
+            checkMod();
             if (last < 0) 
             {
                 return;
             }
             MyArrayList.this.remove(last);
-            nextIndex--;
+            nextIndex = last;
             last = -1;
+            expectedArray();
         }
+
+        public void add(E obj)
+        {
+            checkMod();
+            MyArrayList.this.add(nextIndex, obj);
+            nextIndex++;
+            last = -1;
+            expectedArray();
+        }
+        public void expectedArray()
+        {
+            rightSize = MyArrayList.this.size;
+            rightStuff = new Object[rightSize];
+
+            for(int i = 0; i < rightSize ; i++)
+                rightStuff[i] = MyArrayList.this.values[i];
+        }
+
+        public void checkMod()
+        {
+            if(MyArrayList.this.size != rightSize)
+                throw new ConcurrentModificationException();
+            for (int i = 0; i < rightSize; i++)
+            {
+                if (MyArrayList.this.values[i] != rightStuff[i])
+                    throw new ConcurrentModificationException();
+            }
+        }
+
     }
 }

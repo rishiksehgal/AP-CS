@@ -1,5 +1,4 @@
 import java.util.Iterator;
-
 /**
  * MyLinkedList is our implementation of a doubly LinkedList.
  *
@@ -269,7 +268,7 @@ public class MyLinkedList<E>
     /**
      * Returns the first element of the list.
      *
-     * @return first element, or null if empty
+     * @return first element
      */
     public E getFirst()
     {
@@ -281,9 +280,9 @@ public class MyLinkedList<E>
     }
 
     /**
-     * Returns the last element of the list.
+     * Returns the last element of the list
      *
-     * @return last element, or null if empty
+     * @return last element
      */
     public E getLast()
     {
@@ -295,10 +294,9 @@ public class MyLinkedList<E>
     }
 
     /**
-     * Removes and returns the first element of the list.
+     * Removes the first element of the list and returns it
      *
-     * @return removed element, or null if empty
-     * @postcondition first element is removed, size decremented
+     * @return removed element
      */
     public E removeFirst()
     {
@@ -322,10 +320,9 @@ public class MyLinkedList<E>
     }
 
     /**
-     * Removes and returns the last element of the list.
+     * Removes and returns the last element
      *
-     * @return removed element, or null if empty
-     * @postcondition last element is removed, size decremented
+     * @return removed element
      */
     public E removeLast()
     {
@@ -349,7 +346,7 @@ public class MyLinkedList<E>
     }
 
     /**
-     * Returns an iterator over elements of this list.
+     * Returns an iterator
      *
      * @return iterator
      */
@@ -368,7 +365,7 @@ public class MyLinkedList<E>
         private boolean remove;
 
         /**
-         * Constructs an iterator at the start of the list.
+         * Creates an iterator at the start of the list.
          */
         public MyLinkedListIterator()
         {
@@ -383,7 +380,7 @@ public class MyLinkedList<E>
         /**
          * Checks if there are more elements.
          *
-         * @return true if another element exists
+         * @return true if there is another element
          */
         public boolean hasNext()
         {
@@ -391,9 +388,9 @@ public class MyLinkedList<E>
         }
 
         /**
-         * Returns the next element in the iteration.
+         * Returns the next element
          *
-         * @return next element, or null if none
+         * @return next element
          */
         public E next()
         {
@@ -411,8 +408,8 @@ public class MyLinkedList<E>
         /**
          * Removes the last element returned by next().
          *
-         * @postcondition last returned element is removed from the list,
-         *                size decremented
+         * @precondition next method has to be called
+         * @postcondition last element is removed and size is decremented
          */
         public void remove()
         {
