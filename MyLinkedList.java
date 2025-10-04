@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.ConcurrentModificationException;
 /**
  * MyLinkedList is our implementation of a doubly LinkedList.
  *
@@ -153,6 +154,38 @@ public class MyLinkedList<E>
     }
 
     /** 
+     * Inserts obj at the given index.
+     *
+     * @param index index where to insert
+     * @param obj element to insert
+     * @precondition  0 <= index <= size
+     * @postcondition inserts obj at position index,
+     *                moving elements at position index and higher
+     *                to the right (adds 1 to their indices) and adjusts size
+     */
+    public void add(int index, E obj)
+    {
+        if (index == size)
+        {
+            addLast(obj);
+        }
+        else if (index == 0)
+        {
+            addFirst(obj);
+        }
+        else
+        {
+            DoubleNode x = new DoubleNode(obj);
+            DoubleNode y = getNode(index);
+            x.setPrevious(y.getPrevious());
+            y.getPrevious().setNext(x);
+            x.setNext(y);
+            y.setPrevious(x);
+            size++;
+        }
+    }
+
+    /** 
      * Removes the element at the index
      *
      * @param index index of element to remove
@@ -186,39 +219,7 @@ public class MyLinkedList<E>
         }
         return x;
     }
-
-    /** 
-     * Inserts obj at the given index.
-     *
-     * @param index index where to insert
-     * @param obj element to insert
-     * @precondition  0 <= index <= size
-     * @postcondition inserts obj at position index,
-     *                moving elements at position index and higher
-     *                to the right (adds 1 to their indices) and adjusts size
-     */
-    public void add(int index, E obj)
-    {
-        if (index == size)
-        {
-            addLast(obj);
-        }
-        else if (index == 0)
-        {
-            addFirst(obj);
-        }
-        else
-        {
-            DoubleNode x = new DoubleNode(obj);
-            DoubleNode y = getNode(index);
-            x.setPrevious(y.getPrevious());
-            y.getPrevious().setNext(x);
-            x.setNext(y);
-            y.setPrevious(x);
-            size++;
-        }
-    }
-
+    
     /**
      * Inserts obj at the beginning of the list.
      *
@@ -363,6 +364,8 @@ public class MyLinkedList<E>
         private DoubleNode nextNode;
         private DoubleNode returned;
         private boolean remove;
+        private int rightSize;
+        private Object[] rightStuff;
 
         /**
          * Creates an iterator at the start of the list.
@@ -375,6 +378,7 @@ public class MyLinkedList<E>
             }
             returned = null;
             remove = false;
+            expectedList();
         }
 
         /**
@@ -384,6 +388,7 @@ public class MyLinkedList<E>
          */
         public boolean hasNext()
         {
+            checkMod();
             return nextNode != null;
         }
 
@@ -394,6 +399,7 @@ public class MyLinkedList<E>
          */
         public E next()
         {
+            checkMod();
             if (!hasNext())
             {
                 return null;
@@ -403,6 +409,7 @@ public class MyLinkedList<E>
             nextNode = nextNode.getNext();
             remove = true;
             return x;
+            
         }
 
         /**
@@ -413,6 +420,7 @@ public class MyLinkedList<E>
          */
         public void remove()
         {
+            checkMod();
             if (remove && returned != null)
             {
                 if (returned.getPrevious() == null)
@@ -436,6 +444,39 @@ public class MyLinkedList<E>
                 size--;
                 returned = null;
                 remove = false;
+                expectedList();
+            }
+        }
+        public void expectedList()
+        {
+            int x = 0;
+            rightSize = MyLinkedList.this.size;
+            rightStuff = new Object[rightSize];
+            for(DoubleNode y = first; y!= null; y = y.getNext())
+            {
+                rightStuff[x] = y.getValue();
+                x++;
+            }
+        }
+        public void checkMod()
+        {
+            if (size != rightSize)
+            {
+                throw new ConcurrentModificationException();
+            }
+            int x = 0;
+            DoubleNode y = first;
+            for (; y != null && x < rightSize; y = y.getNext())
+            {
+                if (y.getValue() != rightStuff[x])
+                {
+                    throw new ConcurrentModificationException();
+                }
+                x++;
+            }
+            if (y != null || x != rightSize)
+            {
+                throw new ConcurrentModificationException();
             }
         }
     }
