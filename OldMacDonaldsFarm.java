@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author Rishik Sehgal
  * No assistance
  * 
- * @version Oct 2, 2025
+ * @version Oct 2, 2025    
  * 
  */
 public class OldMacDonaldsFarm
@@ -51,7 +51,7 @@ public class OldMacDonaldsFarm
 
 
     /**
-     * Runs the farm
+     * Runs the farm 
      * @param args some fancy thing
      */
     public static void main (String [ ] args) 
