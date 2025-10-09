@@ -309,6 +309,7 @@ public class MyArrayList<E>
             {
                 return;
             }
+            
             MyArrayList.this.remove(last);
             nextIndex = last;
             last = -1;
