@@ -39,6 +39,7 @@ public class SolitaireDisplay extends JComponent implements MouseListener
         frame.pack();
         frame.setVisible(true);
         gameWon = false;
+        
     }
 
     public void paintComponent(Graphics g)
@@ -86,12 +87,13 @@ public class SolitaireDisplay extends JComponent implements MouseListener
             }
         }
         //win celebration
-        super.paintComponent(g);
+        
         if(won())
         {
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.PLAIN, 24));
-            g.drawString("You Win Somehow!", 50, 50);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 96));
+            g.drawString("You Win Somehow!",(getWidth()/2) -100, (CARD_HEIGHT/2) + 15);
+            System.out.println("You Win");
         }
     }
 
