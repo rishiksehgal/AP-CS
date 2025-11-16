@@ -32,4 +32,22 @@ public class CafeteriaQueue
     {
         return a.remove();
     }
+
+    /**
+     * Peeks next Student
+     * @return the element of the next Student
+     */
+    public Student peekNextStudent()
+    {
+        return a.element();
+    }
+
+    /**
+     * Returns the size of the Queue
+     * @return the size of the Queue
+     */
+    public int getQueueSize()
+    {
+        return a.size();
+    }
 }

@@ -7,7 +7,7 @@ public class CafeteriaTester
 {
     /**
      * Tests CafeteriaQueue Class
-     * @param args thingy
+     * @param args 67
      */
     public static void main(String[] args) 
     {
@@ -15,18 +15,18 @@ public class CafeteriaTester
         c.addStudent("Freshman", 1,"Freshman");
         c.addStudent("Mason", 2,"Sophomore");
         c.addStudent("Gary", 3,"SuperSenior");
-        System.out.println("Queue Size = " + c.a.size());
+        System.out.println("Queue Size = " + c.getQueueSize());
         while(c.a.size() > 0)
         {
             System.out.println("Served " + c.serveStudent().printDetails());
         }
         c.addStudent("Gooner", 4, "Sophomore");
-        System.out.println("Queue Size = " + c.a.size());
-        System.out.println("Served" + c.serveStudent().printDetails());
+        System.out.println("Queue Size = " + c.getQueueSize());
+        System.out.println("Served " + c.serveStudent().printDetails());
         System.out.println("isEmpty:" + c.a.isEmpty());
         c.addStudent("Lebron", 67, "Goat");
-        System.out.println("Peek: " + c.a.element().printDetails());
-        System.out.println("Size: " + c.a.size());
+        System.out.println("Peek: " + c.peekNextStudent().printDetails());
+        System.out.println("Size: " + c.getQueueSize());
         System.out.println("Served: " + c.serveStudent().printDetails());
 
     }
