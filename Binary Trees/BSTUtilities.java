@@ -49,38 +49,20 @@ public abstract class BSTUtilities
 	//               (and no new TreeNodes have been created)
 	private static TreeNode deleteNode(TreeNode t, TreeDisplay display)
 	{
-		// Case 1: Node has no children (leaf node)
 		if(t.getLeft() == null && t.getRight() == null)
 		{
 			return null;
 		}
-		
-		// Case 2: Node has only a right child
-		if(t.getLeft() == null)
+		else if(t.getLeft() == null && t.getRight() != null)
 		{
 			return t.getRight();
 		}
-		
-		// Case 3: Node has only a left child
-		if(t.getRight() == null)
+		else if(t.getRight() == null)
 		{
 			return t.getLeft();
 		}
-		
-		// Case 4: Node has two children
-		// Find the in-order successor (smallest value in right subtree)
-		TreeNode successor = t.getRight();
-		while(successor.getLeft() != null)
-		{
-			successor = successor.getLeft();
-		}
-		
-		// Replace current node's value with successor's value
-		t.setVal(successor.getValue());
-		
-		// Delete the successor from the right subtree
-		t.setRight(delete(t.getRight(), (Comparable)successor.getValue(), display));
-		
+		t.setVal(TreeUtil.leftmost(t.getRight()));
+ 		t.setRight(delete(t.getRight(), (Comparable) TreeUtil.leftmost(t.getRight()), display));
 		return t;
 	}
 
@@ -93,26 +75,22 @@ public abstract class BSTUtilities
 		if(t == null)
 		{
 			return null;
-		}
-		
-		int compareResult = x.compareTo(t.getValue());
-		
-		if(compareResult < 0)
+		}		
+		if(x.compareTo(t.getValue()) < 0)
 		{
-			// Value is in left subtree
+			display.visit(t);
 			t.setLeft(delete(t.getLeft(), x, display));
 		}
-		else if(compareResult > 0)
+		else if(x.compareTo(t.getValue()) > 0)
 		{
-			// Value is in right subtree
+			display.visit(t);
 			t.setRight(delete(t.getRight(), x, display));
 		}
 		else
 		{
-			// Found the node to delete
+			display.visit(t);
 			return deleteNode(t, display);
 		}
-		
 		return t;
 	}
 }
