@@ -40,4 +40,44 @@ public class HeapUtils
             heapify(heap, i);
         }
     }
+
+    public  Comparable remove(Comparable[] heap)
+    {
+        if(heapSize != 0)
+        {
+            Comparable x = heap[1];
+            heap[1]= heap[heapSize];
+            heapSize--;
+            heapify(heap, 1);
+            return x;
+        }    
+        return null;
+        
+    }
+
+    public  Comparable[] insert(Comparable[] heap, Comparable item)
+    {
+        if(heapSize >= heap.length - 1)
+        {
+            Comparable[] temp = new Comparable[heap.length + 1];
+            for(int i = 0; i < heap.length; i++)
+            {
+                temp[i] = heap[i];
+            }
+            heap = temp;
+        }
+        heapSize++;
+        heap[heapSize] = item;
+        int last = heapSize;
+        while(last/2 >= 1 && heap[last].compareTo(heap[last / 2]) > 0)
+        {
+            Comparable x = heap[last];
+            heap[last] = heap[last / 2];
+            heap[last / 2] = x;
+            last = last / 2;
+        }
+
+        return heap;
+        
+    }
 }
