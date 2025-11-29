@@ -49,7 +49,7 @@ public class BinarySearchTreeTester extends BinaryTreeTester
                 int newNum = Integer.parseInt(sc.nextLine());
                 System.out.println("Input was " + newNum);
                 x = newNum;
-                BSTUtilities.insert(t,x,display);
+                t = BSTUtilities.insert(t,x,display);
                 display.displayTree(t);
             }   
             
@@ -66,7 +66,7 @@ public class BinarySearchTreeTester extends BinaryTreeTester
                 int newNum = Integer.parseInt(sc.nextLine());
                 System.out.println("Input was " + newNum);
                 x = newNum;
-                BSTUtilities.delete(t, x, display);
+                t = BSTUtilities.delete(t, x, display);
                 display.displayTree(t);
             }   
             
