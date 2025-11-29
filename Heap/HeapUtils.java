@@ -1,14 +1,37 @@
+/**
+ * HeapUtils is a class that has various methods that can be run on an array that acts as a heap
+ * 
+ * @author Rishik Sehgal
+ * @version 1
+ *
+ */ 
 public class HeapUtils 
 {
     private int heapSize = 0;
+    /**
+     * Creates a HeapUtils object
+     * @param h is the size of heap
+     */
     public HeapUtils(int h)
     {
         heapSize = h;
     }
+
     /**
-     * Time Complexity O(n)
-     * @param heap
-     * @param index
+     * Retrieves the heapSize
+     * @return the heapSize
+     */
+    public int getHeapSize()
+    {
+        return heapSize;
+    }
+
+    /**
+     * Time Complexity O(log n) because the amount of times it runs depends on the height
+     * , and the height is the exponent by which you get the number of nodes in a binary tree.
+     * Heapifys the subtree starting from the index given
+     * @param heap is the array that we heapify from 
+     * @param index is the root of the tree that we heapify
      */
     public void heapify(Comparable[] heap, int index)
     {
@@ -32,6 +55,12 @@ public class HeapUtils
         }
     }
 
+    /**
+     * Creates the whole Heap using the heapify method by starting from the last parent node and going up.
+     * Time Complexity O(n) because the number of operations is proportional to the size of the array.
+     * Goes from every parent node up to the root node and does the heapify operation on each of them.
+     * @param heap is the array being converted into a heap using the heapify method
+     */
     public void buildHeap(Comparable [] heap)
     {
         int y = heapSize/2;
@@ -41,7 +70,15 @@ public class HeapUtils
         }
     }
 
-    public  Comparable remove(Comparable[] heap)
+    /**
+     * Removes and returns the root value, leaving a complete binary tree that is one element smaller
+     * and meets the heap condition. 
+     * Time Complexity O(log n) every operation other than heapify has a fixed time so its time complexity
+     * is the time complexity of remove.
+     * @param heap is the heap in which the root value is removed
+     * @return the root node which is removed
+     */
+    public Comparable remove(Comparable[] heap)
     {
         if(heapSize != 0)
         {
@@ -55,6 +92,16 @@ public class HeapUtils
         
     }
 
+    /**
+     * It inserts item into the heap, maintaining the heap property, and returns the resulting heap.
+     * Time Complexity is O(log n) if array does not need to be resized O(n) if it does.
+     * Since the node added is at the end, if heapify is used, it might not fit the heap property.
+     * Instead of going down it goes up but the time complexity is the same as heapify( O(log n)).
+     * If it needs to be resized it runs a for loop for each element of the heap which is O(n).
+     * @param heap is the heap in which the item is inserted
+     * @param item to be inserted
+     * @return the resulting heap
+     */
     public  Comparable[] insert(Comparable[] heap, Comparable item)
     {
         if(heapSize >= heap.length - 1)
@@ -79,5 +126,31 @@ public class HeapUtils
 
         return heap;
         
+    }
+
+    /**
+     * Creates a max-heap from the array and then swaps the root with the last element.
+     * It then heapifys the array with a smaller heap size so it does not affect the already
+     * sorted element.
+     * Time Complexity is O(n log n) because the for loop is dependent upon the amount of elements in the 
+     * heap and for each element you do the heapify method which has a time complexity of O(log n).
+     * By multiplying the two, you get the time complexity of O(n log n).
+     * @param heap the array that is sorted using heapSort
+     * @return the sorted array
+     */
+    public Comparable[] heapSort(Comparable[] heap)
+    {
+        buildHeap(heap);
+        int x = heapSize;
+        for(int i = heapSize; i > 1; i--)
+        {
+            Comparable temp = heap[1];
+            heap[1] = heap[i];
+            heap[i] = temp;
+            heapSize--;
+            heapify(heap,1);
+        }
+        heapSize = x;
+        return heap;
     }
 }

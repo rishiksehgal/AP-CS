@@ -1,5 +1,5 @@
 /**
- * Main method that creates a Heap
+ * Main method that creates a Heap and tests HeapUtils methods
  * 
  * @author Rishik Sehgal
  * @version 1
@@ -21,10 +21,21 @@ public class Main
         x.buildHeap(intObjects);
         h.displayHeap(intObjects, 11);
         //
-        //x.remove(intObjects);
-        //h.displayHeap(intObjects, 10);
+        x.remove(intObjects);
+        h.displayHeap(intObjects, 10);
         //
         intObjects = (Integer []) x.insert(intObjects, 67);
-        h.displayHeap(intObjects, 12);
+        h.displayHeap(intObjects, 11);
+        //
+        for(int i = 1; i < x.getHeapSize() + 1; i++)
+        {
+            System.out.print(intObjects[i] + " ");
+        }
+        x.heapSort(intObjects);
+        System.out.println();
+        for(int i = 1; i < x.getHeapSize() + 1; i++)
+        {
+            System.out.print(intObjects[i] + " ");
+        }
     }
 }
