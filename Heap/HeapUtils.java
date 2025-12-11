@@ -2,7 +2,7 @@
  * HeapUtils is a class that has various methods that can be run on an array that acts as a heap
  * 
  * @author Rishik Sehgal
- * @version 1
+ * @version Nov 31, 2025
  *
  */ 
 public class HeapUtils 
@@ -48,17 +48,17 @@ public class HeapUtils
         }
         if(largest != index)
         {
-           Comparable x = heap[index];
-           heap[index] = heap[largest];
-           heap[largest] = x;
-           heapify(heap, largest);
+            Comparable x = heap[index];
+            heap[index] = heap[largest];
+            heap[largest] = x;
+            heapify(heap, largest);
         }
     }
 
     /**
-     * Creates the whole Heap using the heapify method by starting from the last parent node and going up.
-     * Time Complexity O(n) because the number of operations is proportional to the size of the array.
-     * Goes from every parent node up to the root node and does the heapify operation on each of them.
+     * Creates the Heap using the heapify method by starting from the last parent node and going up.
+     * Time Complexity O(n) because number of operations is proportional to the size of the array.
+     * Goes from every parent node up to the root node and does the heapify operation.
      * @param heap is the array being converted into a heap using the heapify method
      */
     public void buildHeap(Comparable [] heap)
@@ -71,9 +71,9 @@ public class HeapUtils
     }
 
     /**
-     * Removes and returns the root value, leaving a complete binary tree that is one element smaller
-     * and meets the heap condition. 
-     * Time Complexity O(log n) every operation other than heapify has a fixed time so its time complexity
+     * Removes and returns the root value, leaving a complete binary tree that is one element
+     *  smaller and meets the heap condition. 
+     * Time Complexity O(log n) every operation other than heapify has fixed time so time complexity
      * is the time complexity of remove.
      * @param heap is the heap in which the root value is removed
      * @return the root node which is removed
@@ -102,7 +102,7 @@ public class HeapUtils
      * @param item to be inserted
      * @return the resulting heap
      */
-    public  Comparable[] insert(Comparable[] heap, Comparable item)
+    public Comparable[] insert(Comparable[] heap, Comparable item)
     {
         if(heapSize >= heap.length - 1)
         {
@@ -132,8 +132,8 @@ public class HeapUtils
      * Creates a max-heap from the array and then swaps the root with the last element.
      * It then heapifys the array with a smaller heap size so it does not affect the already
      * sorted element.
-     * Time Complexity is O(n log n) because the for loop is dependent upon the amount of elements in the 
-     * heap and for each element you do the heapify method which has a time complexity of O(log n).
+     * Time Complexity is O(n log n) because the for loop is dependent upon the number of elements
+     * in heap and heapify is run for each element which has a time complexity of O(log n).
      * By multiplying the two, you get the time complexity of O(n log n).
      * @param heap the array that is sorted using heapSort
      * @return the sorted array
@@ -148,7 +148,7 @@ public class HeapUtils
             heap[1] = heap[i];
             heap[i] = temp;
             heapSize--;
-            heapify(heap,1);
+            heapify(heap, 1);
         }
         heapSize = x;
         return heap;

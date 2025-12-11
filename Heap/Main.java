@@ -2,11 +2,15 @@
  * Main method that creates a Heap and tests HeapUtils methods
  * 
  * @author Rishik Sehgal
- * @version 1
+ * @version Nov 31, 2025
  *
  */ 
 public class Main 
 {
+    /**
+     * Main method to test
+     * @param args random thingy
+     */
     public static void main(String[] args) 
     {
         Integer[] intObjects = new Integer[13];
@@ -15,17 +19,20 @@ public class Main
             intObjects[i] = (int) (101* Math.random());
         }
         HeapDisplay h = new HeapDisplay();
-        h.displayHeap(intObjects,11);
+        h.displayHeap(intObjects, 11);
         //
         HeapUtils x = new HeapUtils(11);
         x.buildHeap(intObjects);
-        h.displayHeap(intObjects, 11);
+        HeapDisplay a = new HeapDisplay();
+        a.displayHeap(intObjects, 11);
         //
         x.remove(intObjects);
-        h.displayHeap(intObjects, 10);
+        HeapDisplay b = new HeapDisplay();
+        b.displayHeap(intObjects, 10);
         //
+        HeapDisplay c = new HeapDisplay();
         intObjects = (Integer []) x.insert(intObjects, 67);
-        h.displayHeap(intObjects, 11);
+        c.displayHeap(intObjects, 11);
         //
         for(int i = 1; i < x.getHeapSize() + 1; i++)
         {
