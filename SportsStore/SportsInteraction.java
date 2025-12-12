@@ -16,6 +16,7 @@ public class SportsInteraction
         store = s;
         isRunning = true;
         cart = new ArrayList<String>();
+        checkout = 0.00;
     }
     
     public void start() 
@@ -34,7 +35,7 @@ public class SportsInteraction
             { 
                 showCart();
                 store.setWalletBalance(store.getWalletBalance() - checkout);
-                checkout = 0.0;
+                checkout = 0.00;
                 cart = new ArrayList<String>();
             }
             else if(x.toLowerCase().equals("exit"))
@@ -84,6 +85,6 @@ public class SportsInteraction
                 System.out.println(cart.get(i));
             }
         }
-        System.out.println();
+        System.out.println("Purchase Successful");
     }
 }
