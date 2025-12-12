@@ -2,14 +2,12 @@ public class Shoes implements Merchandise
 {
     
     private double price;
-    private int limit;
     private String[] itemNames;
     
     public Shoes() 
     {
         price = 129.99;
-        limit = 35;
-        itemNames = new String[] {"Freshman", "Gary", "Mason", "WhiteCrocs"};
+        itemNames = new String[] {"Freshman","Gary","Mason","WhiteCrocs"};
     }
     
     @Override
@@ -17,22 +15,16 @@ public class Shoes implements Merchandise
     { 
         return price; 
     }
-    
-    @Override
-    public int getLimit() 
-    { 
-        return limit; 
-    }
-    
+
     @Override
     public String[] getItemNames() 
     { 
         return itemNames; 
     }
-    
+
     @Override
-    public void reduceLimit(int amount) 
-    { 
-        limit = limit - amount; 
+    public String returnName()
+    {
+        return "SHOES";
     }
 }
