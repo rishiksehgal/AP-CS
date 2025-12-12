@@ -1,7 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+/**
+ * SportsInteraction handles all the input for the SportsStore.
+ * 
+ * @author Rishik Sehgal
+ * @version Dec 12, 2025
+ *
+ */ 
 public class SportsInteraction 
 {
     private Scanner scanner;
@@ -10,6 +16,10 @@ public class SportsInteraction
     private ArrayList<String> cart;
     private double checkout;
 
+    /**
+     * Creates a SportsInteraction object
+     * @param s the SportsStore object to be utilized
+     */
     public SportsInteraction(SportsStore s) 
     {
         scanner = new Scanner(System.in);
@@ -19,6 +29,9 @@ public class SportsInteraction
         checkout = 0.00;
     }
     
+    /**
+     * Starts the program
+     */
     public void start() 
     {
         System.out.println();
@@ -29,7 +42,8 @@ public class SportsInteraction
 
         while(isRunning)
         {
-            System.out.print("Wallet Balance: " + store.getWalletBalance() + "  What do you want to do? (Jerseys/Shoes/Balls/Checkout/Exit)");
+            System.out.print("Wallet Balance: " + store.getWalletBalance() + 
+                "  What do you want to do? (Jerseys/Shoes/Balls/Checkout/Exit)");
             String x = scanner.nextLine();
             if (x.toLowerCase().equals("checkout"))
             { 
@@ -57,11 +71,14 @@ public class SportsInteraction
                         int z = scanner.nextInt();
                         scanner.nextLine();
                         if((checkout + (m.getPrice() * z)) > store.getWalletBalance())
+                        {
                             System.out.println("Stop trying to shoplift.");
+                        }
                         else
                         {
                             checkout += (m.getPrice() * (double) z);
-                            cart.add(z + "  " + m.getItemNames()[y - 1] + " $" + m.getPrice() * (double) z);
+                            cart.add(z + "  " + m.getItemNames()[y - 1] + " $" + 
+                                m.getPrice() * (double) z);
                             System.out.println("Added to your cart.");
                         }
                     }
@@ -72,12 +89,17 @@ public class SportsInteraction
         }
     }
 
+    /**
+     * Displays the cart of the user if they wish to checkout.
+     */
     public void showCart()
     {
         System.out.println();
         System.out.println("    CART");
         if (cart.isEmpty()) 
+        {
             System.out.println("Empty Cart");
+        }
         else
         {
             for(int i = 0; i < cart.size(); i++)
