@@ -1,31 +1,38 @@
-/**
- * Jerseys class - standardized price of 70 and stock of 1
- */
-public class Jerseys extends Merchandise
+public class Jerseys implements Merchandise 
 {
-    /**
-     * Constructor for objects of class Jerseys
-     */
-    public Jerseys(String n)
+    
+    private double price;
+    private int limit;
+    private String[] itemNames;
+    
+    public Jerseys() 
     {
-        super(n);
-    }
-
-    /**
-     * Returns standardized price of 70
-     */
-    @Override
-    public int getCost()
-    {
-        return 70;
+        price = 89.99;
+        limit = 50;
+        itemNames = new String[] {"Curry", "Lebron", "Zaza", "YaoMing"};
     }
     
-    /**
-     * Returns standardized stock of 1
-     */
     @Override
-    public int getStock()
-    {
-        return 1;
+    public double getPrice() 
+    { 
+        return price; 
+    }
+    
+    @Override
+    public int getLimit() 
+    { 
+        return limit; 
+    }
+    
+    @Override
+    public String[] getItemNames() 
+    { 
+        return itemNames; 
+    }
+    
+    @Override
+    public void reduceLimit(int amount) 
+    { 
+        limit = limit - amount; 
     }
 }

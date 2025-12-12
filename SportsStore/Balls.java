@@ -1,15 +1,15 @@
-public class Shoes implements Merchandise 
+public class Balls implements Merchandise 
 {
     
     private double price;
     private int limit;
     private String[] itemNames;
     
-    public Shoes() 
+    public Balls() 
     {
-        price = 129.99;
-        limit = 35;
-        itemNames = new String[] {"Freshman", "Gary", "Mason", "WhiteCrocs"};
+        price = 70.00;
+        limit = 5;
+        itemNames = new String[] {"Basketball", "Hockey Ball", "Volleyball", "Waterpolo Ball"};
     }
     
     @Override
