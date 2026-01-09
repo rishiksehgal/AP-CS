@@ -30,19 +30,6 @@ public class Main
         HeapDisplay b = new HeapDisplay();
         b.displayHeap(intObjects, 10);
         //
-        HeapDisplay c = new HeapDisplay();
-        intObjects = (Integer []) x.insert(intObjects, 67);
-        c.displayHeap(intObjects, 11);
-        //
-        for(int i = 1; i < x.getHeapSize() + 1; i++)
-        {
-            System.out.print(intObjects[i] + " ");
-        }
-        x.heapSort(intObjects);
-        System.out.println();
-        for(int i = 1; i < x.getHeapSize() + 1; i++)
-        {
-            System.out.print(intObjects[i] + " ");
-        }
+        
     }
 }

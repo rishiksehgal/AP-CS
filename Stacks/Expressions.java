@@ -35,7 +35,7 @@ public class Expressions
                 if (stack.isEmpty())
                 {
                     return false;
-                }
+                } 
                 String head = stack.pop();
                 if ((current.equals(")") && !head.equals("("))
                         || (current.equals("]") && !head.equals("["))
