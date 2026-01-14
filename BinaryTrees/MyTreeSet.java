@@ -6,32 +6,49 @@ public class MyTreeSet<E>
 
 	public MyTreeSet()
 	{
-		// Initialize all instance variables 
+		size = 0;
+        root = new TreeNode(null);
 		display = new TreeDisplay();
 	}
 
 	public int size()
 	{
-		throw new RuntimeException("Implement me!");
+		return size;
 	}
 
 	public boolean contains(Object obj)
 	{
-		throw new RuntimeException("Implement me!");
+		if(size == 0)
+        {
+            return false;
+        }
+        Comparable x = (Comparable)obj;
+        TreeNode y = root;
+        while(y != null)
+        {
+            int cmp = x.compareTo(y.getValue());
+            if(cmp == 0)
+                return true;
+            else if(cmp > 0)
+                y = y.getRight();
+            else
+                y = y.getLeft();
+        }
+        return false;
 	}
 
 	// if obj is not present in this set, adds obj and
 	// returns true; otherwise returns false
 	public boolean add(E obj)
 	{
-		throw new RuntimeException("Implement me!");
+		
 	}
 
 	// if obj is present in this set, removes obj and
 	// returns true; otherwise returns false}
 	public boolean remove(Object obj)
 	{
-		throw new RuntimeException("Implement me!");
+		
 	}
 
 	public String toString()
