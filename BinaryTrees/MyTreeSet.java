@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class MyTreeSet<E>
 {
 	private TreeNode root;
@@ -7,7 +10,6 @@ public class MyTreeSet<E>
 	public MyTreeSet()
 	{
 		size = 0;
-        root = new TreeNode(null);
 		display = new TreeDisplay();
 	}
 
@@ -18,37 +20,43 @@ public class MyTreeSet<E>
 
 	public boolean contains(Object obj)
 	{
-		if(size == 0)
-        {
-            return false;
-        }
-        Comparable x = (Comparable)obj;
-        TreeNode y = root;
-        while(y != null)
-        {
-            int cmp = x.compareTo(y.getValue());
-            if(cmp == 0)
-                return true;
-            else if(cmp > 0)
-                y = y.getRight();
-            else
-                y = y.getLeft();
-        }
-        return false;
+		Comparable  x = (Comparable) obj;
+        return BSTUtilities.contains(root, x, display);
 	}
 
 	// if obj is not present in this set, adds obj and
 	// returns true; otherwise returns false
 	public boolean add(E obj)
 	{
-		
+        if(root == null)
+        {
+            root = new TreeNode(obj);
+            size++;
+            return true;
+        }
+		if(contains(obj))
+        {
+            return false;
+        }
+        else
+        {
+            size++;
+            root = BSTUtilities.insert(root,(Comparable) obj, display);
+            return true;
+        }
 	}
 
 	// if obj is present in this set, removes obj and
 	// returns true; otherwise returns false}
 	public boolean remove(Object obj)
 	{
-		
+        if(!contains(obj))
+        {
+            return false;
+        }
+        root = BSTUtilities.delete(root, (Comparable) obj, display);
+        size--;
+        return true;
 	}
 
 	public String toString()
@@ -62,4 +70,61 @@ public class MyTreeSet<E>
 			return " ";
 		return toString(t.getLeft()) + t.getValue() + toString(t.getRight());
 	}
+
+    public TreeSetIterator iterator()
+    {
+        return new TreeSetIterator();
+    }
+
+    private class TreeSetIterator implements Iterator
+    {
+        private ArrayList<Object> values = new ArrayList<Object>();
+        private int nextIndex = 0;
+        private int lastReturnedIndex = -1;
+
+        public TreeSetIterator()
+        {
+            inOrderTraversal(root);
+        }
+
+        public void inOrderTraversal(TreeNode t)
+        {
+            if (t == null)
+            {
+                return;
+            }
+            inOrderTraversal(t.getLeft());
+            values.add(t.getValue());
+            inOrderTraversal(t.getRight());
+        }
+        
+
+        public boolean hasNext()
+        {
+            return nextIndex < size;
+        }
+
+
+
+
+        public Object next()
+        {
+            lastReturnedIndex = nextIndex;
+            int a = nextIndex;
+            nextIndex++;
+            return values.get(a);
+        }
+
+
+
+        public void remove()
+        {
+            MyTreeSet.this.remove(lastReturnedIndex);
+            if (lastReturnedIndex < nextIndex)
+            {
+                nextIndex--;
+            }
+            lastReturnedIndex = -1;
+        }
+    }
 }
