@@ -1,50 +1,49 @@
 /**
- * ListNode represents a single node in a linked list.
+ * ListNode is a Node in a Linked List.
  *
- * @param <E> the type of element stored in the node
+ * @param <E> thingy
  * @author Rishik Sehgal
  * @version 1
  */
 public class ListNode<E>
 {
-    private E value;
+    private Object value;
     private ListNode<E> next;
 
     /**
-     * Constructs a ListNode with the specified value.
+     * Creates a ListNode Object
      *
-     * @param value the value to store in this node
+     * @param v value in node
      */
-    public ListNode(E value)
+    public ListNode(Object v)
     {
-        this.value = value;
-        this.next = null;
+        value = v;
     }
 
     /**
-     * Returns the value stored in this node.
+     * Returns value of the node
      *
      * @return the value
      */
-    public E getValue()
+    public Object getValue()
     {
         return value;
     }
 
     /**
-     * Sets the value stored in this node.
+     * Sets the value for the ListNode.
      *
-     * @param value the new value
+     * @param v is the value
      */
-    public void setValue(E value)
+    public void setValue(Object v)
     {
-        this.value = value;
+        value = v;
     }
 
     /**
-     * Returns the next node in the linked list.
+     * Returns the next node.
      *
-     * @return the next node, or null if this is the last node
+     * @return next node
      */
     public ListNode<E> getNext()
     {
@@ -52,12 +51,12 @@ public class ListNode<E>
     }
 
     /**
-     * Sets the next node in the linked list.
+     * Sets the next node.
      *
-     * @param next the next node
+     * @param n is the next node
      */
-    public void setNext(ListNode<E> next)
+    public void setNext(ListNode<E> n)
     {
-        this.next = next;
+        next = n;
     }
 }
