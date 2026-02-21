@@ -16,6 +16,7 @@ import java.io.Reader;
  *  5. A digit.
  *  6. Any other character not defined above.
  * @author Mr. Page
+ * @version 1
  *
  */
 
@@ -71,106 +72,105 @@ public class Scanner
         }
     }
 
+    /**
+     * Eats the string passed and if mathes current character goes to the next one.
+     * @param object is the string passed
+     */
     private void eat(String object)
     {
         if (currentChar.equals(object))
         {
-                getNextChar();  
+            getNextChar();  
         }
         else
         {
-            throw new IllegalArgumentException("Current character: " + currentChar + "; Your string: " + object);
+            throw new IllegalArgumentException("Current character: " + currentChar +
+             "; Your string: " + object);
         }
     }
 
     private boolean isLetter(String object)
     {
-        return Character.isLetter(object.toCharArray()[0]);
+        return object != null && object.length() == 1 && 
+            ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").contains(object);
     }
 
     private boolean isDigit(String object)
     {
-        return Character.isDigit(object.toCharArray()[0]);
+        return object != null && object.length() == 1 &&
+            ("0123456789").contains(object);
     }
     private boolean isSpecialCharacter(String object)
     {
-        return object.equals("'") || object.equals("-");
+        return object != null && (object.equals("'") || object.equals("-"));
     }
 
     private boolean isPhraseTerminator(String object)
     {
-        return object.equals(",") || object.equals(":") || object.equals(";");
+        return object != null && (object.equals(",") || object.equals(";") || object.equals(":"));
     }
 
     private boolean isSentenceTerminator(String object)
     {
-        return object.equals(".") || object.equals("?") || object.equals("!");
+        return object != null && (object.equals(".") || object.equals("!") || object.equals("?"));
     }
 
     private boolean isWhiteSpace(String object)
     {
-        return Character.isWhitespace(object.toCharArray()[0]);
+        return object != null && object.isBlank();
     }
 
+    /**
+     * Determines if there is a next token.
+     * @return true if there is a next token
+     */
     public boolean hasNextToken()
     {
         return !endOfFile;
     }
 
+    /**
+     * Goes to next token.
+     * @return token
+     */
     public Token nextToken()
     {
-        if (endOfFile)
-        {
-            return new Token(TOKEN_TYPE.END_OF_FILE, "");
-        }
-
-        String token = "";
-        while (!endOfFile && currentChar != null && isWhiteSpace(currentChar))
+        while (hasNextToken() && currentChar != null && isWhiteSpace(currentChar))
         {
             getNextChar();
         }
-
         if (endOfFile)
         {
             return new Token(TOKEN_TYPE.END_OF_FILE, "");
         }
-
         if (isLetter(currentChar))
         {
+            String token = "";
             token += currentChar;
             getNextChar();
-
-            while (!endOfFile && (isLetter(currentChar) || isDigit(currentChar) || isSpecialCharacter(currentChar)))
+            while (hasNextToken() && (isLetter(currentChar) || isDigit(currentChar) 
+                    || isSpecialCharacter(currentChar)))
             {
                 token += currentChar;
                 getNextChar();
             }
-
             return new Token(TOKEN_TYPE.WORD, token.toLowerCase());
-        }
-
-        if (isSentenceTerminator(currentChar))
-        {
-            String value = currentChar;
-            getNextChar();
-            return new Token(TOKEN_TYPE.END_OF_SENTENCE, value);
-        }
-
-        if (isPhraseTerminator(currentChar))
-        {
-            String value = currentChar;
-            getNextChar();
-            return new Token(TOKEN_TYPE.END_OF_PHRASE, value);
-        }
-
-        if (isDigit(currentChar))
-        {
-            String value = currentChar;
-            getNextChar();
-            return new Token(TOKEN_TYPE.DIGIT, value);
         }
         String value = currentChar;
         getNextChar();
-        return new Token(TOKEN_TYPE.UNKNOWN, value);
+        TOKEN_TYPE t = TOKEN_TYPE.UNKNOWN;
+        if (isSentenceTerminator(value))
+        {
+            t = TOKEN_TYPE.END_OF_SENTENCE;
+        }
+        else if (isPhraseTerminator(value))
+        {
+            t = TOKEN_TYPE.END_OF_PHRASE;
+        }
+        else if (isDigit(value))
+        {
+            t = TOKEN_TYPE.DIGIT;
+        }
+        return new Token(t, value);
     }
 }

@@ -98,6 +98,11 @@ public class MyHashMap<K, V> implements Map<K, V>
     }
 
 
+    /**
+     * Gets the Value corresponding to a key
+     * @param key that is searched for
+     * @return the value
+     */
     public V get(Object key)
     {
         for(MapEntry<K, V> i: buckets[toBucketIndex(key)])
@@ -113,7 +118,12 @@ public class MyHashMap<K, V> implements Map<K, V>
 
     }
 
-
+    /**
+     * Puts a key with a certain value
+     * @param key to be added
+     * @param value to be added
+     * @return old value for key if there is one
+     */
     public V put(K key, V value)
     {
         for(MapEntry< K, V> i: buckets[toBucketIndex(key)])
@@ -133,7 +143,11 @@ public class MyHashMap<K, V> implements Map<K, V>
 
     }
 
-
+    /**
+     * Removes the entry of a certain key
+     * @param key to be removed
+     * @return corresponding value
+     */
     public V remove(Object key)
     {
         LinkedList<MapEntry<K, V>> bucket = buckets[toBucketIndex(key)];
@@ -150,7 +164,7 @@ public class MyHashMap<K, V> implements Map<K, V>
         return null;
     }
 
-
+    
     public void putAll(Map<? extends K, ? extends V> m)
     {
         for (K key : m.keySet())
