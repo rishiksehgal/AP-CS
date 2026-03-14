@@ -1,39 +1,55 @@
 import java.util.ArrayList;
 /**
- * Phrase class that bundles up a group of tokens into a phrase. 
- * ArrayList is used because it is easy to access and traverse the data in the list
+ * Contains a group of Token Objects.
+ * ArrayList used because unknown size at runtime and O(1) time complexity for .get().
+ * @author RIshik Sehgal
+ * @version Feb 20
  */
-public class Phrase {
-    private ArrayList<Token> a;
+public class Phrase 
+{
+    private ArrayList<Token> tokens;
+    /**
+     * Creates the tokens ArrayList
+     */
     public Phrase()
     {
-        a = new ArrayList<Token>();
+        tokens = new ArrayList<Token>();
     }
 
-    public void addToken(Token tk)
+    /**
+     * Adds a Token
+     * @param t token to be added
+     */
+    public void addToken(Token t)
     {
-        a.add(tk);
+        tokens.add(t);
     }
 
+    /**
+     * Returns a copy of the phrases list
+     * @return copy
+     */
     public ArrayList<Token> getList()
     {
-        ArrayList<Token> b = new ArrayList<>();
-        for (int i=0; i<a.size(); i++)
+        ArrayList<Token> copy = new ArrayList<>();
+        for (int i = 0; i < tokens.size(); i++)
         {
-            b.add(a.get(i));
+            copy.add(tokens.get(i));
         }
-
-        return b;
+        return copy;
     }
 
+    /**
+     * Gives String rep of this phrase
+     * @return string rep
+     */
     public String toString()
     {
-        String s = "";
-        for (int i=0; i<a.size(); i++)
+        String x = "";
+        for (int i = 0; i<tokens.size(); i++)
         {
-            s = s + a.get(i).getValue() + " ";
+            x = x + tokens.get(i).getValue() + " ";
         }
-
-        return s;
+        return x;
     }
 }

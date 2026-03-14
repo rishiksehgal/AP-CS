@@ -17,7 +17,7 @@ public class DocumentTester
      */
     public static void main(String[] str) throws FileNotFoundException
     {
-        FileReader reader = new FileReader(new File("./AuthorLab/MysteryText/mystery1.txt"));
+        FileReader reader = new FileReader(new File("./AP-CS/FindAuthor/MysteryText/mystery1.txt"));
         Scanner scanner = new Scanner(reader);
         Document document = new Document(scanner);
         

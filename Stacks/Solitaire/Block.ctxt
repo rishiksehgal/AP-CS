@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Block
+comment0.text=\n\ class\ BLock\ encapsulates\ a\ Block\ abstraction\ which\ can\ be\ placed\ into\ a\ Gridworld\ style\ grid\n\ You\ are\ expected\ to\ comment\ this\ class\ according\ to\ the\ style\ guide.\n\ @author\ Rishik\n\ @version\ 1\n
+comment1.params=
+comment1.target=Block()
+comment1.text=\n\ constructs\ a\ blue\ block,\ because\ blue\ is\ the\ greatest\ color\ ever\!\n
+comment2.params=
+comment2.target=java.awt.Color\ getColor()
+comment2.text=\n\ Returns\ the\ color\n\ @return\ the\ color\n
+comment3.params=newColor
+comment3.target=void\ setColor(java.awt.Color)
+comment3.text=\n\ Sets\ the\ color\n\ @param\ newColor\ the\ new\ color\n
+comment4.params=
+comment4.target=MyBoundedGrid\ getGrid()
+comment4.text=\n\ Returns\ the\ grid\n\ @return\ the\ grid\n
+comment5.params=
+comment5.target=void\ removeSelfFromGrid()
+comment5.text=\n\ Removes\ this\ Block\ from\ the\ Grid\n
+comment6.params=
+comment6.target=java.lang.String\ toString()
+comment6.text=\n\ returns\ a\ string\ with\ the\ location\ and\ color\ of\ this\ block\n\ @return\ String\ with\ the\ location\ and\ color\ of\ this\ block\n
+numComments=7

@@ -1,27 +1,28 @@
 /**
- * Token class that identifies different token types like a word, end of sentence, a digit, etc. and stores their value
+ * Token class that has different token types.
  * 
- * @author Zavier Chen
- * @version 2/20/2026
+ * @author Rishik Sehgal
+ * @version February 20
  */
-public class Token {
+public class Token 
+{
     private final Scanner.TOKEN_TYPE type;
     private final String value;
 
     /**
-     * Constructs a token with a specified token type as well as a String value
-     * @param type the token type of the token
-     * @param value the value the token will hold
+     * Creates a token with specified type and value
+     * @param t is token type
+     * @param v is value
      */
-    public Token(Scanner.TOKEN_TYPE type, String value)
+    public Token(Scanner.TOKEN_TYPE t, String v)
     {
-        this.type = type;
-        this.value = value;
+        type = t;
+        value = v;
     }
 
     /**
-     * Returns the type of the token
-     * @return the type of the token
+     * Returns the type
+     * @return type
      */
     public Scanner.TOKEN_TYPE getType()
     {
@@ -29,8 +30,8 @@ public class Token {
     }
 
     /**
-     * Returns the value of the token
-     * @return the value of the token
+     * Returns the value
+     * @return value
      */
     public String getValue()
     {
@@ -38,19 +39,25 @@ public class Token {
     }
 
     /**
-     * toString method which will print both the type and value of the token
+     * Returns type and value
+     * @return type and value
      */
     public String toString()
     {
-        return "Token type: " + type + "; Value: " + value;
+        return "Type: " + type + ", Value: " + value;
     }
 
     /**
-     * Equals method that compares two tokens using their type and value
+     * Compares two tokens
+     * @return true if they are the same
      */
     public boolean equals(Object obj)
     {
-        Token other = (Token) obj;
-        return type == other.getType() && value.equals(other.getValue());
+        if(obj instanceof Token)
+        {
+            Token x = (Token) obj;
+            return value.equals(x.getValue()) && type == x.getType(); 
+        }
+        return false;
     }
 }

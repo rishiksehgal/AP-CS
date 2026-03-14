@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=MyBoundedGrid
+comment0.text=\n\ MyBoundedGrid\ is\ a\ grid\ that\ stores\ Objects\ in\ a\ 2d\ array.\n\ @author\ Rishik\ Sehgal\n\ @version\ 1\n\ @param\ <E>\ all\ types\ of\ objects\n
+comment1.params=rows\ cols
+comment1.target=MyBoundedGrid(int,\ int)
+comment1.text=\n\ Creates\ a\ MyBoundedGrid\ object\ with\ the\ specified\ amount\ of\ rows\ and\ cols.\ \n\ @param\ rows\ num\ of\ rows\n\ @param\ cols\ number\ of\ cols\n
+comment2.params=
+comment2.target=int\ getNumRows()
+comment2.text=\n\ Returns\ the\ number\ of\ rows\n\ @return\ the\ number\ of\ rows\n
+comment3.params=
+comment3.target=int\ getNumCols()
+comment3.text=\n\ Returns\ the\ number\ of\ columns\n\ @return\ the\ number\ of\ columns\n
+numComments=4

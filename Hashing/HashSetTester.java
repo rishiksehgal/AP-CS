@@ -1,6 +1,6 @@
 import java.util.*;
 /**
-* Tester for the Hashing lab.  
+* Tester for the Hashing lab. 
 * There are no user serviceable parts inside.  Changing anything will
 * void your warranty.
 */
